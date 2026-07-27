@@ -1,0 +1,26 @@
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background: #e8f5e9;
+  font-size: 0.875rem;
+
+  &.closed {
+    background: #ffebee;
+  }
+}
+
+button {
+  margin-top: 0.75rem;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
