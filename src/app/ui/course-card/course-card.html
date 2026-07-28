@@ -21,6 +21,7 @@
     (click)="enrollClicked.emit(course())"
     [disabled]="course().enrollmentCount >= course().maxCapacity"
   >
-    Enroll
+    <!-- Enroll -->
+    <a [routerLink]="['/enroll']">Enroll</a>
   </button>
 </div>
