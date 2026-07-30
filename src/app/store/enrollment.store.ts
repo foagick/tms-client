@@ -15,6 +15,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, concatMap, tap, catchError, EMPTY } from 'rxjs';
 import { EnrollmentService } from '../services/enrollment.service';
 import { Enrollment } from '../models/enrollment.model';
+
 export const EnrollmentStore = signalStore(
     {  providedIn: 'root' },
     withState({ isLoading: false, error: null as string | null }),
@@ -22,8 +23,7 @@ export const EnrollmentStore = signalStore(
 
     withComputed((store) => ({
         pendingCount: computed(
-        () => store.entities().filter(e => e.status === 'Pending').length
-        ),
+        () => store.entities().filter(e => e.status === 'Pending').length),
     })),
     withMethods((store, api = inject(EnrollmentService)) => ({
         loadEnrollments: rxMethod<void>(
