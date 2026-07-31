@@ -1,0 +1,31 @@
+<section class="enrollments">
+  <header>
+    <h1>Enrollment List</h1>
+    <p>Pending approvals: {{ store.pendingCount() }}</p>
+  </header>
+
+  @if (store.isLoading()) {
+    <p>Loading enrollments...</p>
+  }
+
+  @for (enrollment of store.entities(); track enrollment.id) {
+    <div class="enrollment-card">
+      <div>
+        <strong>{{ enrollment.studentName }}</strong>
+        <span>{{ enrollment.courseName }}</span>
+      </div>
+      <span class="status">{{ enrollment.status }}</span>
+      @if (enrollment.status === 'Pending') {
+        <button type="button" (click)="onApprove(enrollment.id)">Approve</button>
+      }
+    </div>
+  } @empty {
+    @if (!store.isLoading()) {
+      <p>No enrollments found.</p>
+    }
+  }
+
+  @if (store.error()) {
+    <p class="error">{{ store.error() }}</p>
+  }
+</section>
