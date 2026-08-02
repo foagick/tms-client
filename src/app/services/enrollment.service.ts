@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class EnrollmentService {
   private http = inject(HttpClient);
-  private baseUrl = 'http://localhost:5029/api/enrollments';
+  private baseUrl = 'http://localhost:5029/api/courses/1/enrollments';
 
   getAll(): Observable<Enrollment[]> {
     return this.http.get<Enrollment[]>(this.baseUrl);
