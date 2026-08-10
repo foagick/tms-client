@@ -33,6 +33,19 @@ export const EnrollmentStore = signalStore(
     ),
   })),
   withMethods((store, api = inject(EnrollmentService), sync = inject(LiveSyncService)) => ({
+    listenForLiveUpdates: rxMethod<void>(
+      pipe(
+        tap(() => sync.connect()),
+        switchMap(() => sync.events$),
+        tap(event => {
+          patchState(
+            store,
+            updateEntity({ id: event.id, changes: { status: event.status } 
+            })
+          );
+        })
+      )
+    ),
     loadEnrollments: rxMethod<void>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
@@ -76,19 +89,6 @@ export const EnrollmentStore = signalStore(
           ),
         ),
       ),
-    ),
-    listenForLiveUpdates: rxMethod<void>(
-      pipe(
-        tap(() => sync.connect()),
-        switchMap(() => sync.events$),
-        tap(event => {
-          patchState(
-            store,
-            updateEntity({ id: event.id, changes: { status: event.status } 
-            })
-          );
-        })
-      )
     ),
   })),
 );
