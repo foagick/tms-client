@@ -88,5 +88,7 @@ export const EnrollmentStore = signalStore(
             })
           );
         })
+      )
+    ),
   })),
 );
