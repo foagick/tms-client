@@ -32,7 +32,7 @@ export const EnrollmentStore = signalStore(
           .length,
     ),
   })),
-  withMethods((store, api = inject(EnrollmentService)) => ({
+  withMethods((store, api = inject(EnrollmentService), sync = inject(LiveSyncService)) => ({
     loadEnrollments: rxMethod<void>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
@@ -77,5 +77,16 @@ export const EnrollmentStore = signalStore(
         ),
       ),
     ),
+    listenForLiveUpdates: rxMethod<void>(
+      pipe(
+        tap(() => sync.connect()),
+        switchMap(() => sync.events$),
+        tap(event => {
+          patchState(
+            store,
+            updateEntity({ id: event.id, changes: { status: event.status } 
+            })
+          );
+        })
   })),
 );
