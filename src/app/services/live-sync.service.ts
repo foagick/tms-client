@@ -1,6 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { inject, Injectable, PLATFORM_ID, signal } from '@angular/core';
 import { Subject } from 'rxjs';
+import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
 
 export interface EnrollmentStatusEvent {
   id: string;
@@ -10,7 +11,7 @@ export interface EnrollmentStatusEvent {
 @Injectable({
   providedIn: 'root',
 })
-export class LiveSync {
+export class LiveSyncService {
   private platformId = inject(PLATFORM_ID);
   private connection: HubConnection | null = null;
   private eventsSubject = new Subject<EnrollmentStatusEvent>();
@@ -47,6 +48,6 @@ export class LiveSync {
     this.connection
       .start()
       .then(() => this.connectionState.set('connected'))
-      .catch((err) => console.error('SignalR connection error:', err));
+      .catch(err => console.error('SignalR connection error:', err));
   }
 }
