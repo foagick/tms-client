@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { EnrollmentStore } from './store/enrollment.store';
 
 @Component({
   selector: 'app-root',
