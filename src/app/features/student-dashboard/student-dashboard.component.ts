@@ -14,16 +14,17 @@ import { CourseService } from '../../services/course.service';
 export class StudentDashboardComponent {
   private api = inject(CourseService);
 
-  studentName = signal("Liya Kebede");
+  studentName = signal('Liya Kebede');
   earnedCredits = signal(45);
 
   graduationStatus = computed(() =>
-  this.earnedCredits() >= 120 ? "Eligible for Graduation" : "In Progress",);
-  
-   selectedCourse = signal<Course | null>(null);
+    this.earnedCredits() >= 120 ? 'Eligible for Graduation' : 'In Progress',
+  );
+
+  selectedCourse = signal<Course | null>(null);
 
   coursesResource = rxResource({
-  stream: () => this.api.getAll(),
+    stream: () => this.api.getAll(),
   });
 
   registerForClass() {
