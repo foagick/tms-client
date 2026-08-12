@@ -11,8 +11,11 @@ import { AnalyticsChart } from '../../ui/analytics-chart/analytics-chart';
 })
 export class InstructorDashboard implements OnInit {
   store = inject(EnrollmentStore);
+  // private store = inject(EnrollmentStore);
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.store.loadEnrollments();
+    this.store.listenForLiveUpdates();
   }
+
 }
