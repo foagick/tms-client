@@ -4,13 +4,14 @@ import { provideHttpClient, withInterceptors, withXsrfConfiguration } from "@ang
 
 import { routes } from './app.routes';
 import { credentialsInterceptor } from './interceptors/credentials.interceptor';
+import { errorInterceptor } from './interceptors/error.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZonelessChangeDetection(),
     provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(
-      withInterceptors([credentialsInterceptor]),
+      withInterceptors([credentialsInterceptor,  errorInterceptor]),
       withXsrfConfiguration({
       cookieName: 'XSRF-TOKEN', // Cookie name set by .NET server
       headerName: 'X-XSRF-TOKEN', // Header expected by .NET server
