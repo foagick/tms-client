@@ -18,4 +18,10 @@ export class CourseService {
       })
       .pipe(map((response) => response.items));
   }
+
+  /** Delete a course by id. Returns an observable that completes on success. */
+  delete(id: number) {
+    return this.http.delete<void>(`${this.base}/${id}`);
+  }
+  
 }
