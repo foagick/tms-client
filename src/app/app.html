@@ -1,1 +1,19 @@
-<router-outlet />
+<header class="app-header" style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:#f5f5f5;">
+  <div class="brand">
+    <a routerLink="/dashboard" style="text-decoration:none;font-weight:600;color:#333">tms-client</a>
+  </div>
+
+  <nav class="main-nav">
+    <ng-container *ngIf="auth.currentUser() as user; else loggedOut">
+      <span style="margin-right:12px">{{ user.displayName }}</span>
+      <button (click)="logout()">Logout</button>
+    </ng-container>
+    <ng-template #loggedOut>
+      <a routerLink="/login">Login</a>
+    </ng-template>
+  </nav>
+</header>
+
+<main style="padding:20px;">
+  <router-outlet></router-outlet>
+</main>

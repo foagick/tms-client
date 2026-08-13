@@ -16,7 +16,7 @@ export interface LoginRequest {
 })
 export class AuthService {
   private http = inject(HttpClient);
-  private readonly base = environment.apiUrl; // e.g. http://localhost:5029/api/1
+  private readonly base = environment.apiUrl;
   currentUser = signal<TmsUser | null>(null);
 
   hasRole(role: string): boolean {
@@ -34,4 +34,15 @@ export class AuthService {
     this.currentUser.set(user);
   }
 
+  /** Logout: call API to invalidate server session and clear local state */
+  async logout() {
+    try {
+      await firstValueFrom(this.http.post<void>(`${this.base}/auth/logout`, {}));
+    } catch (err) {
+      // ignore network errors — still clear client state
+      console.warn('Logout request failed:', err);
+    } finally {
+      this.currentUser.set(null);
+    }
+  }
 }
