@@ -3,15 +3,15 @@
     <div class="chart-bars">
         <div class="bar approved"
             [style.height.px]="approvedHeight()">
-            <span>Approved {{ data().filter(e => e.status === 'Approved') }}</span>
+            <span>Approved {{ approvedCount() }}</span>
         </div>
         <div class="bar pending"
             [style.height.px]="pendingHeight()">
-            <span>Pending {{ data().filter(e => e.status === 'Pending') }}</span>
+            <span>Pending {{ pendingCount() }}</span>
         </div>
         <div class="bar rejected"
             [style.height.px]="rejectedHeight()">
-            <span>Rejected {{ data().filter(e => e.status === 'Rejected') }}</span>
+            <span>Rejected {{ rejectedCount() }}</span>
         </div>
     </div>
     <p class="chart-summary">
