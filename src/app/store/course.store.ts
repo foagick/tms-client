@@ -1,12 +1,15 @@
 import { inject } from '@angular/core';
-import { signalStore, withMethods, patchState } from '@ngrx/signals';
-import { removeEntity, setAllEntities } from '@ngrx/signals/entities';
+import { signalStore, withMethods, patchState, withState } from '@ngrx/signals';
+import { removeEntity, setAllEntities, withEntities } from '@ngrx/signals/entities';
 import { catchError, EMPTY } from 'rxjs';
 import { CourseService } from '../services/course.service';
+import { Course } from '../models/course.model';
 
 export const CourseStore = signalStore(
   { providedIn: 'root' },
-  withMethods((store, svc = inject(CourseService)) => ({
+  withState({ error: null as string | null }),
+  withEntities<Course>(),
+  withMethods((store: any, svc = inject(CourseService)) => ({
     deleteCourse(id: number) {
       // 1. Take snapshot of current entities BEFORE mutating local state
       const previousSnapshot = store.entities();
