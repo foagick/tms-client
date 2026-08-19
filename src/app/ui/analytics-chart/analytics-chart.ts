@@ -11,20 +11,13 @@ export class AnalyticsChart {
 
   data = input.required<Enrollment[]>();
 
-  approvedHeight = computed(() => {
-    const count = this.data().filter(e => e.status === 'Approved').length;
-    return Math.max(20, count * 3);
-  });
+  approvedCount = computed(() => this.data().filter(e => e.status === 'Approved').length);
+  pendingCount = computed(() => this.data().filter(e => e.status === 'Pending').length);
+  rejectedCount = computed(() => this.data().filter(e => e.status === 'Rejected').length);
 
-  pendingHeight = computed(() => {
-    const count = this.data().filter(e => e.status === 'Pending').length;
-    return Math.max(20, count * 3);
-  });
-
-  rejectedHeight = computed(() => {
-    const count = this.data().filter(e => e.status === 'Rejected').length;
-    return Math.max(20, count * 3);
-  });
+  approvedHeight = computed(() => Math.max(20, this.approvedCount() * 3));
+  pendingHeight = computed(() => Math.max(20, this.pendingCount() * 3));
+  rejectedHeight = computed(() => Math.max(20, this.rejectedCount() * 3));
 
 
 }
