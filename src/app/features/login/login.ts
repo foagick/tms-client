@@ -14,13 +14,13 @@ export class Login {
   private auth = inject(AuthService);
   private router = inject(Router);
 
-  credentials = { username: '', password: '' } as LoginRequest;
+  credentials = { email: '', password: '' } as LoginRequest;
   loading = signal(false);
   error = signal<string | null>(null);
 
   async onSubmit() {
-    if (!this.credentials.username || !this.credentials.password) {
-      this.error.set('Please enter username and password.');
+    if (!this.credentials.email || !this.credentials.password) {
+      this.error.set('Please enter email and password.');
       return;
     }
 
