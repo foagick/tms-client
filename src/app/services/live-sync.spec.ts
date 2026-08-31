@@ -1,13 +1,23 @@
 import { TestBed } from '@angular/core/testing';
+import { LiveSyncService } from './live-sync.service';
 
-import { LiveSync } from './live-sync';
-
-describe('LiveSync', () => {
-  let service: LiveSync;
+describe('LiveSyncService', () => {
+  let service: LiveSyncService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(LiveSync);
+    TestBed.configureTestingModule({
+      providers: [
+        {
+          provide: LiveSyncService,
+          useValue: {
+            connect: () => {},
+            disconnect: () => {},
+            hubConnection: null,
+          },
+        },
+      ],
+    });
+    service = TestBed.inject(LiveSyncService);
   });
 
   it('should be created', () => {

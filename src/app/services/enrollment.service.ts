@@ -15,7 +15,10 @@ export class EnrollmentService {
     return this.http.get<Enrollment[]>(this.baseUrl);
   }
 
-  approve(id: string): Observable<void> {
-    return this.http.post<void>(`${this.baseUrl}/${id}/approve`, {});
-  }
+  // approve(id: string): Observable<void> {
+  //   return this.http.post<void>(`${this.baseUrl}/${id}/approve`, {});
+  // }
+  approve(id: string): Observable<Enrollment> {
+  return this.http.post<Enrollment>(`/api/v2/enrollments/${id}/approve`, {});
+}
 }

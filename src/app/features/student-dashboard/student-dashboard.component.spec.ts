@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StudentDashboardComponent } from './student-dashboard.component';
+import { provideRouter } from '@angular/router';
 
 describe('StudentDashboardComponent', () => {
   let component: StudentDashboardComponent;
@@ -9,10 +10,12 @@ describe('StudentDashboardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [StudentDashboardComponent],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(StudentDashboardComponent);
     component = fixture.componentInstance;
+    fixture.detectChanges();
     await fixture.whenStable();
   });
 
