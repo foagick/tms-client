@@ -3,6 +3,7 @@
   <p>Credits Earned: {{ earnedCredits() }}</p>
   <p>Graduation Status: {{ graduationStatus() }}</p>
   <button (click)="registerForClass()">Register for a Class (+3 credits)</button>
+  <a routerLink="/admin/courses">Admin Courses</a>
 
   <h2>Course Catalog</h2>
   @if (coursesResource.isLoading()) {
