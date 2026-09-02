@@ -24,4 +24,9 @@
     <!-- Enroll -->
     <a [routerLink]="['/enroll']">Enroll</a>
   </button>
+  @if (auth.hasRole('Admin')) {
+    <button (click)="deleteClicked.emit(course().id)" class="btn-danger">
+      Delete Course
+    </button>
+  }
 </div>

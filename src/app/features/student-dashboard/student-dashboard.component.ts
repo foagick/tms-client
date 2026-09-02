@@ -3,6 +3,7 @@ import { CourseCard } from '../../ui/course-card/course-card';
 import { Course } from '../../models/course.model';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { CourseService } from '../../services/course.service';
+import { CourseStore } from '../../store/course.store';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -14,6 +15,7 @@ import { RouterLink } from '@angular/router';
 })
 export class StudentDashboardComponent {
   private api = inject(CourseService);
+  private courseStore = inject(CourseStore);
 
   studentName = signal('Liya Kebede');
   earnedCredits = signal(45);
@@ -35,5 +37,9 @@ export class StudentDashboardComponent {
   handleEnroll(course: Course) {
     this.selectedCourse.set(course);
     console.log('Enrollment requested for:', course.title);
+  }
+
+  deleteCourse(id: number) {
+    this.courseStore.deleteCourse(id);
   }
 }

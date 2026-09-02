@@ -1,5 +1,6 @@
-import { Component, input, output } from '@angular/core';
+import { Component, inject, input, output } from '@angular/core';
 import { Course } from '../../models/course.model';
+import { AuthService } from '../../services/auth.service';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -10,6 +11,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './course-card.scss',
 })
 export class CourseCard {
+  readonly auth = inject(AuthService);
   course = input.required<Course>();
   enrollClicked = output<Course>();
+  deleteClicked = output<number>();
 }
