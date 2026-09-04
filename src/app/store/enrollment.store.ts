@@ -40,11 +40,15 @@ export const EnrollmentStore = signalStore(
         tap(() => sync.connect()),
         switchMap(() => sync.events$),
         tap(event => {
-          patchState(
-            store,
-            updateEntity({ id: event.id, changes: { status: event.status } 
-            }),
+          const entityExists = store.entities().some(
+            enrollment => enrollment.id === event.id,
           );
+          if (entityExists) {
+            patchState(
+              store,
+              updateEntity({ id: event.id, changes: { status: event.status } }),
+            );
+          }
         })
       )
     ),

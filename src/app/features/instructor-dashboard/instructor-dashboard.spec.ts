@@ -25,6 +25,7 @@ describe('InstructorDashboard', () => {
         {
           provide: LiveSyncService,
           useValue: {
+            events$: of(),
             connect: () => {},
             disconnect: () => {},
             on: () => of(null),

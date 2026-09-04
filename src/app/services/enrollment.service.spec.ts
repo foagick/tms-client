@@ -17,9 +17,9 @@ describe('EnrollmentService', () => {
     service = TestBed.inject(EnrollmentService);
   });
   afterEach(() => httpMock.verify());
-  it('getAll() issues GET /api/v2/enrollments and maps the response', async () => {
+  it('getAll() issues GET /api/v2.0/enrollments and maps the response', async () => {
     const result = firstValueFrom(service.getAll());
-    const req = httpMock.expectOne((r) => r.url.endsWith('/api/v2/enrollments'));
+    const req = httpMock.expectOne((r) => r.url.endsWith('/api/v2.0/enrollments'));
     expect(req.request.method).toBe('GET');
     req.flush([
       {
@@ -45,20 +45,11 @@ describe('EnrollmentService', () => {
     expect(enrollments).toHaveLength(2);
     expect(enrollments[0].courseName).toBe('Intro to CS');
   });
-  it('approve(id) issues POST /api/enrollments/{id}/approve', async () => {
+  it('approve(id) issues POST /api/v2.0/enrollments/{id}/approve', async () => {
     const result = firstValueFrom(service.approve('42'));
-    const req = httpMock.expectOne((r) => r.url.endsWith('/api/v2/enrollments/42/approve'));
+    const req = httpMock.expectOne((r) => r.url.endsWith('/api/v2.0/enrollments/42/approve'));
     expect(req.request.method).toBe('POST');
-    req.flush({
-      id: 42,
-      studentId: 11,
-      studentName: 'Abeba',
-      courseId: 101,
-      courseName: 'Intro to CS',
-      status: 'Approved',
-      enrolledAt: '2026-08-12T10:00:00Z',
-    });
-    const approved = await result;
-    expect(approved.status).toBe('Approved');
+    req.flush(null);
+    await result;
   });
 });

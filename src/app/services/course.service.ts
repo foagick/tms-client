@@ -10,6 +10,7 @@ import { environment } from '../../environments/environment';
 export class CourseService {
   private http = inject(HttpClient);
   private readonly base = `${environment.apiUrl}/courses`;
+  private readonly mutationBase = '/api/v2.0/courses';
 
   getAll() {
     return this.http
@@ -21,7 +22,7 @@ export class CourseService {
 
   /** Delete a course by id. Returns an observable that completes on success. */
   delete(id: number) {
-    return this.http.delete<void>(`${this.base}/${id}`);
+    return this.http.delete<void>(`${this.mutationBase}/${id}`);
   }
   
 }
